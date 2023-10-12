@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 my-3">
+      <h1 class="text-center text-main display-4 my-4">Shop Popular Categories</h1>
+    </div>
+    <div class="col-md-12 my-3">
+      <form class="row g-3">
+        <div class="col-lg-4 col-md-6">
+          <label for="searchTitle" class="form-label">Search By Name</label>
+          <input type="text" class="form-control" id="searchTitle" [(ngModel)]="searchTitle"
+            placeholder="Search By Name">
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="searchBrand" class="form-label">Search By Brand</label>
+          <input type="text" class="form-control" id="searchBrand" [(ngModel)]="searchBrand"
+            placeholder="Search By Brand">
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label for="searchPrice" class="form-label">Search By Max. Price</label>
+          <input type="text" class="form-control" id="searchPrice" [(ngModel)]="searchPrice"
+            placeholder="Search By Max. Price">
+        </div>
+      </form>
+    </div>
+
+
+    <div *ngIf="!noItemTosShow" class="row row-cols-1 row-cols-md-5 g-4">
+      <div
+        *ngFor="let product of products  | searchPipe:searchTitle | brandSearch:searchBrand | priceSearch:(searchPrice.length == 0 ? 1000000000 : searchPrice) ; let i = index"
+        class="col mb-4">
+        <div class="card h-100">
+          <img [routerLink]="['/prductsDetails' , product.id]" [src]="product.imageCover" class="card-img-top"
+            [alt]="product.title" />
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.category.name }}</p>
+            <p class="card-text">{{ product.price | currency:"EGP" }}</p>
+            <div class="d-flex align-items-center">
+              <p class="card-text m-0 me-2">{{ product.ratingsAverage }}</p>
+              <i class="fas fa-star rating-color"></i>
+            </div>
+          </div>
+          <div class="card-footer p-0">
+            <button class="btn w-100  d-none add-to-cart " (click)="addToWishList(product.id ,  $event)"
+              (click)="removeToWishList(product.id ,  $event)">
+              <i class="fa-regular fa-heart text-danger cursor-pointer ms-auto d-block"></i>
+            </button>
+            <button class="btn w-100 btn-light cartBtn bg-main d-none add-to-cart"
+              (click)="addToCart( product.id,$event)">Add
+              to
+              Cart
+              <i class="fa-solid fa-circle-notch fa-spin d-none"></i>
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

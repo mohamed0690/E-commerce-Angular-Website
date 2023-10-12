@@ -1,0 +1,42 @@
+owl-carousel-o {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+owl-carousel-o img {
+  max-width: 500px;
+  height: 500px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.8);
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
+  margin: 0 10px;
+}
+
+owl-carousel-o .active img {
+  transform: scale(0.9);
+  border-color: var(--main-color);
+
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+owl-carousel-o img:hover {
+  transform: scale(1);
+  opacity: 1;
+
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+.active-link {
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
